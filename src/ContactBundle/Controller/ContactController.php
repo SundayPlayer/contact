@@ -24,8 +24,6 @@ class ContactController extends DefaultController
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
-
-            dump($contact);
         }
 
         return $this->render('@Contact/addContact.html.twig', [ "form" => $form->createView() ]);

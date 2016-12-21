@@ -17,6 +17,4 @@ class DefaultController extends Controller
     {
         return $this->render('@Contact/Default/index.html.twig');
     }
-
-
 }

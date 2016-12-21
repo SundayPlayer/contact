@@ -1,0 +1,14 @@
+{% extends "ContactBundle:Default:index.html.twig" %}
+{% block body %}
+    {% if categories|length > 0 %}
+        <h1>Categories</h1>
+        <ul>
+            {% for category in categories %}
+                <li>{{ category.name }}</li>
+                {% endfor %}
+        </ul>
+    {% else %}
+        <p>No categories</p>
+    {% endif %}
+    <a href="{{ path('addCategory') }}">Add category</a>
+{% endblock %}

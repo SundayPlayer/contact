@@ -1,5 +1,4 @@
 <?php
-
 namespace ContactBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Contact
 {
+
     /**
      * @var int
      *
@@ -36,19 +36,18 @@ class Contact
     private $lastName;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="phoneNumber", type="integer")
+     * @ORM\Column(name="phoneNumber", type="string", length=15)
      */
     private $phoneNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="mailAdress", type="string", length=255)
+     * @ORM\Column(name="emailAddress", type="string", length=255)
      */
-    private $mailAdress;
-
+    private $emailAddress;
 
     /**
      * Get id
@@ -108,52 +107,23 @@ class Contact
         return $this->lastName;
     }
 
-    /**
-     * Set phoneNumber
-     *
-     * @param integer $phoneNumber
-     *
-     * @return Contact
-     */
-    public function setPhoneNumber($phoneNumber)
-    {
-        $this->phoneNumber = $phoneNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get phoneNumber
-     *
-     * @return int
-     */
-    public function getPhoneNumber()
+    function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
 
-    /**
-     * Set mailAdress
-     *
-     * @param string $mailAdress
-     *
-     * @return Contact
-     */
-    public function setMailAdress($mailAdress)
+    function getEmailAddress()
     {
-        $this->mailAdress = $mailAdress;
-
-        return $this;
+        return $this->emailAddress;
     }
 
-    /**
-     * Get mailAdress
-     *
-     * @return string
-     */
-    public function getMailAdress()
+    function setPhoneNumber($phoneNumber)
     {
-        return $this->mailAdress;
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    function setEmailAddress($emailAddress)
+    {
+        $this->emailAddress = $emailAddress;
     }
 }
-

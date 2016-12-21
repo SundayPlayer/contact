@@ -1,29 +1,34 @@
 <?php
 namespace ContactBundle\Controller;
 
+use ContactBundle\Form\ContactType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use ContactBundle\Entity\Contact;
 
-class RandomContactController extends DefaultController
+class ContactController extends DefaultController
 {
 
     /**
-     * @Route("/add/contact")
+     * @Route("/new/contact", name="addContact")
      */
-    public function createContact()
+    public function newContact(Request $request)
     {
-        $contact = new Contact();
-        $contact->setFirstName('jean');
-        $contact->setLastName('jean');
-        $contact->setEmailAddress('jean@jean.jean');
-        $contact->setPhoneNumber('06.00.00.00.00');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($contact);
-        $em->flush();
+        $form = $this->createForm( ContactType::class );
+        $form->handleRequest( $request );
 
-        return new Response('ok');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contact = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contact);
+            $em->flush();
+
+            dump($contact);
+        }
+
+        return $this->render('@Contact/addContact.html.twig', [ "form" => $form->createView() ]);
     }
 
     /**

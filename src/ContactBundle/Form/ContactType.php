@@ -2,6 +2,8 @@
 
 namespace ContactBundle\Form;
 
+use ContactBundle\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +15,14 @@ class ContactType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstName')->add('lastName')->add('phoneNumber')->add('mailAdress')        ;
+        $builder->add('firstName')
+            ->add('lastName')
+            ->add('phoneNumber')
+            ->add('emailAddress')
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+            ]);
     }
     
     /**

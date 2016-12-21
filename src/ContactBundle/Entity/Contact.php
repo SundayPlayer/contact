@@ -13,6 +13,11 @@ class Contact
 {
 
     /**
+     * @ORM\ManyToOne(targetEntity="Category")
+     */
+    private $category;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -107,23 +112,69 @@ class Contact
         return $this->lastName;
     }
 
-    function getPhoneNumber()
+    /**
+     * Get phoneNumber
+     *
+     * @return string
+     */
+    public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
 
-    function getEmailAddress()
+    /**
+     * Get emailAddress
+     *
+     * @return string
+     */
+    public function getEmailAddress()
     {
         return $this->emailAddress;
     }
 
-    function setPhoneNumber($phoneNumber)
+    /**
+     * Set phoneNumber
+     *
+     * @param string $phoneNumber
+     *
+     * @return Contact
+     */
+    public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
     }
 
-    function setEmailAddress($emailAddress)
+    /**
+     * Set emailAddress
+     *
+     * @param string $emailAddress
+     *
+     * @return Contact
+     */
+    public function setEmailAddress($emailAddress)
     {
         $this->emailAddress = $emailAddress;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set category
+     *
+     * @param Category $category
+     *
+     * @return Contact
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 }

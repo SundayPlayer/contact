@@ -1,0 +1,14 @@
+{% extends "ContactBundle:Default:index.html.twig" %}
+{% block body %}
+    {% if contacts|length > 0 %}
+        <h1>Contacts</h1>
+        <ul>
+            {% for contact in contacts %}
+                <li> <a href="contact/{{contact.id}}">{{ contact.firstName }}</a>({{ contact.lastName }})</li>
+                {% endfor %}
+        </ul>
+    {% else %}
+        <p>No contacts</p>
+    {% endif %}
+    <a href="/add/contact">Add contact</a>
+{% endblock %}

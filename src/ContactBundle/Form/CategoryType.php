@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ContactType extends AbstractType
+class CategoryType extends AbstractType
 {
 
     /**
@@ -15,15 +15,7 @@ class ContactType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('phoneNumber')
-            ->add('emailAddress')
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'name',
-        ]);
+        $builder->add('name');
     }
 
     /**
@@ -32,7 +24,7 @@ class ContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ContactBundle\Entity\Contact'
+            'data_class' => 'ContactBundle\Entity\Category'
         ));
     }
 
@@ -41,6 +33,6 @@ class ContactType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'contactbundle_contact';
+        return 'contactbundle_category';
     }
 }

@@ -15,8 +15,8 @@ class ContactController extends DefaultController
      */
     public function newContact(Request $request)
     {
-        $form = $this->createForm( ContactType::class );
-        $form->handleRequest( $request );
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contact = $form->getData();
@@ -26,7 +26,7 @@ class ContactController extends DefaultController
             $em->flush();
         }
 
-        return $this->render('@Contact/addContact.html.twig', [ "form" => $form->createView() ]);
+        return $this->render('@Contact/addContact.html.twig', ["form" => $form->createView()]);
     }
 
     /**

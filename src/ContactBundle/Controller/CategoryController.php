@@ -24,13 +24,14 @@ class CategoryController extends DefaultController
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
+            return $this->redirectToRoute('categories');
+        } else {
+            return $this->render('@Contact/addCategory.html.twig', ["form" => $form->createView()]);
         }
-
-        return $this->render('@Contact/addCategory.html.twig', ["form" => $form->createView()]);
     }
 
     /**
-     * @Route("/categories")
+     * @Route("/categories", name="categories")
      */
     public function showCategories()
     {

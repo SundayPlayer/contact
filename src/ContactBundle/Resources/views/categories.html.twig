@@ -1,7 +1,7 @@
 {% extends "ContactBundle:Default:index.html.twig" %}
 {% block body %}
+    {{ parent() }}
     {% if categories|length > 0 %}
-        <h1>Categories</h1>
         <ul>
             {% for category in categories %}
                 <li>{{ category.name }}</li>

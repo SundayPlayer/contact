@@ -18,6 +18,11 @@ class Contact
     private $category;
 
     /**
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="contact")
+     */
+    private $images;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -62,6 +67,16 @@ class Contact
     public function getId()
     {
         return $this->id;
+    }
+
+    function getImages()
+    {
+        return $this->images;
+    }
+
+    function setImages($images)
+    {
+        $this->images = $images;
     }
 
     /**

@@ -4,18 +4,13 @@ namespace ContactBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Category
+ * Image
  *
- * @ORM\Table(name="category")
- * @ORM\Entity(repositoryClass="ContactBundle\Repository\CategoryRepository")
+ * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="ContactBundle\Repository\ImageRepository")
  */
-class Category
+class Image
 {
-
-    /**
-     * @ORM\OneToMany(targetEntity="Contact", mappedBy="category")
-     */
-    private $contacts;
 
     /**
      * @var int
@@ -29,9 +24,16 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, unique=true)
+     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", length=255)
+     */
+    private $link;
 
     /**
      * Get id
@@ -44,11 +46,26 @@ class Category
     }
 
     /**
+     * @ORM\ManyToOne(targetEntity="Contact")
+     */
+    private $contact;
+
+    function getContact()
+    {
+        return $this->contact;
+    }
+
+    function setContact($contact)
+    {
+        $this->contact = $contact;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
      *
-     * @return Category
+     * @return Image
      */
     public function setName($name)
     {
@@ -67,25 +84,13 @@ class Category
         return $this->name;
     }
 
-    /**
-     * Get contact
-     *
-     * @return Contact
-     */
-    public function getContacts()
+    function getLink()
     {
-        return $this->contacts;
+        return $this->link;
     }
 
-    /**
-     * Set contact
-     *
-     * @param Contact contact
-     *
-     * @return Category
-     */
-    public function setContact($contacts)
+    function setLink($link)
     {
-        $this->contacts = $contacts;
+        $this->link = $link;
     }
 }

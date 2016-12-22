@@ -24,13 +24,37 @@ class ContactController extends DefaultController
             $em = $this->getDoctrine()->getManager();
             $em->persist($contact);
             $em->flush();
+            return $this->redirectToRoute('contacts');
+        } else {
+            return $this->render('@Contact/addContact.html.twig', ["form" => $form->createView()]);
         }
-
-        return $this->render('@Contact/addContact.html.twig', ["form" => $form->createView()]);
     }
 
     /**
-     * @Route("/contacts")
+     * @Route("/delete/contact/{id}", requirements={"id": "\d+"}, name="deleteContact")
+     */
+    public function deleteContact(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $contact = $em->getRepository('ContactBundle:Contact')->findOneBy(['id' => $id]);
+
+        if ($contact != null) {
+            $images = $em->getRepository('ContactBundle:Image')->findBy(['contact' => $contact]);
+            if ($images != null) {
+                foreach ($images as $image) {
+                    $em->remove($image);
+                    $em->flush();
+                }
+            }
+            $em->remove($contact);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('contacts');
+    }
+
+    /**
+     * @Route("/contacts", name="contacts")
      */
     public function showContacts()
     {
@@ -41,7 +65,7 @@ class ContactController extends DefaultController
     }
 
     /**
-     * @Route("/contact/{id}", requirements={"id": "\d+"})
+     * @Route("/contact/{id}", requirements={"id": "\d+"}, name="contact")
      */
     public function showPost(Contact $contact, $id)
     {

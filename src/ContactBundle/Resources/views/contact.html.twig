@@ -1,8 +1,23 @@
 {% extends "ContactBundle:Default:index.html.twig" %}
 {% block body %}
+    <div>
+        <a href="/new/image/{{ contact.id }}">Add image</a>
+        <a href="/delete/contact/{{ contact.id }}">Delete contact</a>
+    </div>
     <div>First name : {{contact.firstName}}</div>
     <div>Last name : {{contact.lastName}}</div>
     <div>Email : {{contact.emailAddress}}</div>
     <div>Phone number : {{contact.phoneNumber}}</div>
     <div>Category : {{contact.category.name}}</div>
+    <div>Images : </div>
+    {% if contact.images|length > 0 %}
+        <div>
+            {% for image in contact.images %}
+                {#            <img src="{{image.link}}">#}
+                <img src="/images/normal.png">
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No images</p>
+    {% endif %}
 {% endblock %}
